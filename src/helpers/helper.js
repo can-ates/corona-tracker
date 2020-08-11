@@ -339,3 +339,7 @@ export const styles = [
     ],
   },
 ];
+
+export function numberWithCommas(x) {
+  return String(x).replace(/(.)(?=(\d{3})+$)/g, '$1.');
+}
