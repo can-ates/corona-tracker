@@ -25,7 +25,7 @@ function App() {
     background-color: black;
     display: grid;
     grid-template-columns: [global-case] 20% [corona-map] minmax(30%, 52.5%) [global-result] 27.5% [end];
-    grid-template-rows: auto;
+    grid-template-rows: 100%;
   `;
 
   return (
@@ -36,7 +36,7 @@ function App() {
         lastUpdated={total.updated}
       />
       <CoronaMap total={total} data={data} />
-      <GlobalResult />
+      <GlobalResult total={total} data={data} />
     </Container>
   );
 }

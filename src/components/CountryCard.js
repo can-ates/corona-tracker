@@ -20,12 +20,12 @@ const CountryCard = ({ country }) => {
     font-weight: 300;
   `;
 
-  const Title = styled.span`
+  const CaseTitle = styled.span`
     font-weight: 700;
     color: #989898;
   `;
 
-  const Total = styled.span`
+  const TotalDeath = styled.span`
     color: ${props => props.color};
     font-weight: 700;
   `;
@@ -34,12 +34,12 @@ const CountryCard = ({ country }) => {
     <Wrapper>
       <Name>{country.country}</Name>
       <div style={{ marginTop: '1em' }}>
-        <Title>Cases: </Title>
-        <Total color='#A6A6A6'>{country.cases}</Total>
+        <CaseTitle>Cases: </CaseTitle>
+        <TotalDeath color='#A6A6A6'>{country.cases}</TotalDeath>
       </div>
       <div>
-        <Title>Deaths: </Title>
-        <Total color='#B41736'>{country.deaths}</Total>
+        <CaseTitle>Deaths: </CaseTitle>
+        <TotalDeath color='#B41736'>{country.deaths}</TotalDeath>
       </div>
     </Wrapper>
   );

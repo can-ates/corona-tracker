@@ -9,8 +9,7 @@ const GlobalCase = ({ countries, global, lastUpdated }) => {
 
   const Wrapper = styled.div`
     padding: 0.5em;
-    height: 100%;
-    overflow: auto;
+    overflow: hidden;
   `;
 
   const Header = styled.div`
@@ -28,31 +27,47 @@ const GlobalCase = ({ countries, global, lastUpdated }) => {
 
   const Total = styled.span`
     color: #e60000;
-    display: block;
-    text-align: center;
-    font-weight: 700;
+    font-weight: ${props => props.weigth || '700'};
     font-size: ${props => props.size || '2rem'};
     line-height: ${props => props.line || '3rem'};
+    text-align: ${props => props.align};
   `;
 
   const CaseWrapper = styled.div`
     width: 100%;
     background-color: #222222;
+    height: calc(100% - 100px);
     padding: 1em;
-    margin-top: 0.5em;
+    margin: 0.5em 0;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 10px;
+      background-color: #f5f5f5;
+    }
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: #f5f5f5;
+    }
+    &::-webkit-scrollbar {
+      width: 6px;
+      background-color: #f5f5f5;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #ce2727;
+    }
   `;
 
-  const Cases = styled.div`
-    overflow: auto;
-    height: 100%;
-  `;
+  const Cases = styled.div``;
 
   const Case = styled.div`
     border-bottom: 1px solid #5c5c5c;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.3em;
   `;
 
   const Country = styled.div`
-    margin-left: auto;
     color: #b3b3b3;
   `;
 
@@ -60,18 +75,17 @@ const GlobalCase = ({ countries, global, lastUpdated }) => {
     <Wrapper>
       <Header>
         <Title>Global Cases</Title>
-        <Total>{global}</Total>
-        <p></p>
+        <Total align='center'>{global}</Total>
       </Header>
       <CaseWrapper>
         <Title>Cases by Country</Title>
         <Cases>
           {countries.map((country, i) => (
             <Case key={`${country.country}+${i}`}>
-              <Total size='1rem' line='1rem'>
+              <Country>{country.country}</Country>
+              <Total size='1.10rem' weigth='500' line='1rem'>
                 {country.cases}
               </Total>
-              <Country>{country.country}</Country>
             </Case>
           ))}
         </Cases>
