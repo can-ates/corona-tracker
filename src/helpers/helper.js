@@ -343,3 +343,37 @@ export const styles = [
 export function numberWithCommas(x) {
   return String(x).replace(/(.)(?=(\d{3})+$)/g, '$1.');
 }
+
+export function markerSize(total, confirmed) {
+  if (confirmed <= 1000) {
+    return new window.google.maps.Size(10, 9);
+  }
+
+  if (confirmed > 1000 && confirmed <= 10000) {
+    return new window.google.maps.Size(14, 12);
+  }
+
+  if (confirmed > 10000 && confirmed <= 40000) {
+    return new window.google.maps.Size(19, 15);
+  }
+
+  if (confirmed > 40000 && confirmed <= 100000) {
+    return new window.google.maps.Size(23, 20);
+  }
+
+  if (confirmed > 100000 && confirmed <= 500000) {
+    return new window.google.maps.Size(27, 23);
+  }
+
+  if (confirmed > 500000 && confirmed <= 2000000) {
+    return new window.google.maps.Size(33, 27);
+  }
+
+  if (confirmed > 2000000 && confirmed <= 5000000) {
+    return new window.google.maps.Size(45, 38);
+  }
+
+  if (confirmed > 5000000) {
+    return new window.google.maps.Size(75, 66);
+  }
+}
