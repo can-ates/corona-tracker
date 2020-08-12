@@ -35,11 +35,11 @@ const BarChart = props => {
     datasets: [
       {
         label: 'Daily Cases',
-        backgroundColor: 'rgba(51,204,255,0.2)',
-        borderColor: 'rgba(51,204,255,1)',
+        backgroundColor: 'rgba(2,62,88,0.2)',
+        borderColor: 'rgba(2,62,88,1)',
         borderWidth: 1,
-        hoverBackgroundColor: 'rgba(51,204,255,0.4)',
-        hoverBorderColor: 'rgba(51,204,255,1)',
+        hoverBackgroundColor: 'rgba(2,62,88,0.4)',
+        hoverBorderColor: 'rgba(2,62,88,1)',
         data: dailyCases,
       },
     ],
@@ -49,8 +49,10 @@ const BarChart = props => {
     <div>
       <Bar
         data={data}
-        width={100}
-        height={75}
+        height={100}
+        width={200}
+        maintainAspectRatio={true}
+        responsive={false}
         options={{
           scales: {
             xAxes: [

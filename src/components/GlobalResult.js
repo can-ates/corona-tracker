@@ -5,7 +5,7 @@ import BarChart from './BarChart';
 
 const GlobalWrapper = styled.div`
   padding: 0.5em;
-  height: 50%;
+  height: 100%;
 `;
 
 const HeaderWrapper = styled.div`
@@ -15,17 +15,17 @@ const HeaderWrapper = styled.div`
 
 const Header = styled.div`
   width: 100%;
-  background-color: #222222;
+  background-color: #023e58;
   padding: 1em;
   text-align: center;
+  border-radius: 10px;
 `;
 
 const Title = styled.span`
   text-align: center;
   display: block;
-  color: whitesmoke;
-  font-weight: 300;
-  margin-bottom: 1em;
+  color: ${props => props.color || '#e60000'};
+  font-weight: 500;
 `;
 
 const GlobalTotal = styled.span`
@@ -37,7 +37,8 @@ const GlobalTotal = styled.span`
 
 const CaseWrapper = styled.div`
   width: 100%;
-  background-color: #222222;
+  background-color: #023e58;
+  border-radius: 10px;
   padding: 1em;
   margin: 0.5em 0;
   overflow-y: scroll;
@@ -60,7 +61,7 @@ const CaseWrapper = styled.div`
 `;
 const CaseContainer = styled.div`
   display: flex;
-  height: 70%;
+  height: 40%;
 `;
 
 const Case = styled.div`
@@ -69,7 +70,7 @@ const Case = styled.div`
 `;
 
 const Country = styled.div`
-  color: #b3b3b3;
+  color: #f1faee;
 `;
 
 const GlobalResult = ({ total, data }) => {
@@ -77,27 +78,32 @@ const GlobalResult = ({ total, data }) => {
     <GlobalWrapper>
       <HeaderWrapper>
         <Header style={{ marginRight: '0.5em' }}>
-          <Title>Global Deaths</Title>
-          <GlobalTotal color='red'>
+          <Title color='#f28482'>Global Deaths</Title>
+          <GlobalTotal color='#f28482'>
             {numberWithCommas(total.deaths)}
           </GlobalTotal>
         </Header>
         <Header>
-          <Title>Global Recovered</Title>
-          <GlobalTotal color='green'>
+          <Title color='#0ead69'>Global Recovered</Title>
+          <GlobalTotal color='#0ead69'>
             {numberWithCommas(total.recovered)}
           </GlobalTotal>
         </Header>
       </HeaderWrapper>
 
       <CaseContainer>
-        <CaseWrapper scroll='red' style={{ marginRight: '0.5em' }}>
+        <CaseWrapper scroll='#f28482' style={{ marginRight: '0.5em' }}>
           <React.Fragment>
             {data.map((country, i) => (
               <Case key={`${country.country}+${i}`}>
-                <GlobalTotal color='red' size='1rem' weigth='500' line='1rem'>
+                <GlobalTotal
+                  color='#f28482'
+                  size='1rem'
+                  weigth='700'
+                  line='1rem'
+                >
                   {numberWithCommas(country.deaths)}{' '}
-                  <span style={{ fontWeight: '300', fontSize: '0.90rem' }}>
+                  <span style={{ fontWeight: '500', fontSize: '0.90rem' }}>
                     deaths
                   </span>
                 </GlobalTotal>
@@ -107,13 +113,18 @@ const GlobalResult = ({ total, data }) => {
           </React.Fragment>
         </CaseWrapper>
 
-        <CaseWrapper scroll='green'>
+        <CaseWrapper scroll='#0ead69'>
           <React.Fragment>
             {data.map((country, i) => (
               <Case key={`${country.country}+${i}`}>
-                <GlobalTotal color='green' size='1rem' weigth='500' line='1rem'>
+                <GlobalTotal
+                  color='#0ead69'
+                  size='1rem'
+                  weigth='700'
+                  line='1rem'
+                >
                   {numberWithCommas(country.recovered)}{' '}
-                  <span style={{ fontWeight: '300', fontSize: '0.90rem' }}>
+                  <span style={{ fontWeight: '500', fontSize: '0.90rem' }}>
                     recovered
                   </span>
                 </GlobalTotal>
@@ -124,8 +135,16 @@ const GlobalResult = ({ total, data }) => {
         </CaseWrapper>
       </CaseContainer>
 
-      <div style={{ height: '100%' }}>
+      <div>
         <BarChart />
+      </div>
+      <div>
+        <Header>
+          <Title color='#588b8b'>Last Updated</Title>
+          <GlobalTotal size='1rem' line='1.5rem' weigth='500' color='#588b8b'>
+            {new Date(total.updated).toLocaleString()}
+          </GlobalTotal>
+        </Header>
       </div>
     </GlobalWrapper>
   );

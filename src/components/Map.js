@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import redCircle from '../assets/red-circle.png';
 import { styles, markerSize } from '../helpers/helper';
 import CountryCard from './CountryCard';
@@ -20,7 +20,7 @@ const MyMapComponent = compose(
           height: `100%`,
           width: '100%',
           position: 'relative',
-          padding: '0.5em 0',
+          paddingTop: '0.5em',
         }}
       />
     ),
@@ -34,6 +34,17 @@ const MyMapComponent = compose(
   const [coordinates, setCoordinates] = useState({ lat: 46, lng: 2 });
   const [zoom, setZoom] = useState(3);
   const total = props.total;
+
+  useEffect(() => {
+    if (props.click) {
+      setCoordinates({
+        lat: props.click.countryInfo.lat,
+        lng: props.click.countryInfo.long,
+      });
+      setModalOpen(true);
+      setCountry(props.click);
+    }
+  }, [props.click]);
 
   const showModal = country => {
     setModalOpen(true);
@@ -61,7 +72,6 @@ const MyMapComponent = compose(
         draggableCursor: 'cursor',
         draggingCursor: 'cursor',
       }}
-      // onProjectionChanged={props.handleZoom}
     >
       {props.datas.map((data, i) => (
         <Marker
@@ -87,29 +97,13 @@ const MyMapComponent = compose(
 });
 
 const CoronaMap = props => {
-  // const [data, setData] = useState(props.data);
-  // const [usData, setUsData] = useState(props.usData);
-
-  // const zoomChanged = () => {
-  //   console.log('anan');
-  //   setData([]);
-  //   setUsData([]);
-  //   axios
-  //     .get('https://disease.sh/v3/covid-19/countries?yesterday=0&sort=cases')
-  //     .then(res => setData(res.data));
-
-  //   axios
-  //     .get('https://disease.sh/v3/covid-19/jhucsse/counties')
-  //     .then(res => setUsData(res.data));
-  // };
-
   return (
     <React.Fragment>
       {props.data && props.total ? (
         <MyMapComponent
           datas={props.data}
           total={props.total}
-          // handleZoom={zoomChanged}
+          click={props.click}
         />
       ) : (
         <p>Loading</p>

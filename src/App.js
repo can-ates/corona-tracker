@@ -17,6 +17,7 @@ const Container = styled.div`
 function App() {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState([]);
+  const [click, setClick] = useState(null);
 
   useEffect(() => {
     axios
@@ -25,18 +26,23 @@ function App() {
       )
       .then(res => setData(res.data));
     axios
-      .get('https://disease.sh/v3/covid-19/all')
+      .get('https://disease.sh/v3/covid-19/all?yesterday=false')
       .then(res => setTotal(res.data));
   }, []);
+
+  const handleChange = country => {
+    setClick(country);
+  };
 
   return (
     <Container>
       <GlobalCase
+        changeCenter={handleChange}
         countries={data}
         global={total.cases}
         lastUpdated={total.updated}
       />
-      <CoronaMap total={total} data={data} />
+      <CoronaMap total={total} data={data} click={click} />
       <GlobalResult total={total} data={data} />
     </Container>
   );

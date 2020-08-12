@@ -9,21 +9,22 @@ const Wrapper = styled.div`
 
 const Header = styled.div`
   width: 100%;
-  background-color: #222222;
+  background-color: #023e58;
   padding: 1em;
   text-align: center;
+  border-radius: 10px;
 `;
 
 const Title = styled.span`
   text-align: center;
   display: block;
-  color: whitesmoke;
-  font-weight: 300;
+  color: #f1faee;
+  font-weight: 500;
   margin-bottom: 1em;
 `;
 
 const Total = styled.span`
-  color: white;
+  color: #f1faee;
   font-weight: ${props => props.weigth || '700'};
   font-size: ${props => props.size || '2rem'};
   line-height: ${props => props.line || '3rem'};
@@ -32,7 +33,8 @@ const Total = styled.span`
 
 const CaseWrapper = styled.div`
   width: 100%;
-  background-color: #222222;
+  border-radius: 10px;
+  background-color: #023e58;
   height: calc(100% - 100px);
   padding: 1em;
   margin: 0.5em 0;
@@ -51,7 +53,7 @@ const CaseWrapper = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: whitesmoke;
+    background-color: #14213d;
   }
 `;
 
@@ -62,13 +64,16 @@ const Case = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0.3em;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Country = styled.div`
-  color: #b3b3b3;
+  color: #588b8b;
 `;
 
-const GlobalCase = ({ countries, global, lastUpdated }) => {
+const GlobalCase = ({ countries, global, changeCenter }) => {
   return (
     <Wrapper>
       <Header>
@@ -79,7 +84,10 @@ const GlobalCase = ({ countries, global, lastUpdated }) => {
         <Title>Cases by Country</Title>
         <Cases>
           {countries.map((country, i) => (
-            <Case key={`${country.country}+${i}`}>
+            <Case
+              onClick={() => changeCenter(country)}
+              key={`${country.country}+${i}`}
+            >
               <Country>{country.country}</Country>
               <Total size='1.10rem' weigth='500' line='1rem'>
                 {numberWithCommas(country.cases)}

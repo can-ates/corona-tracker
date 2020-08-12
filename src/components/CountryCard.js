@@ -7,16 +7,15 @@ const Wrapper = styled.div`
   width: 15em;
   top: 0.5em;
   left: 0;
-  background-color: #222222;
+  background-color: #0e1626;
   border-radius: 10px;
   padding: 1em;
 `;
 
 const Name = styled.span`
-  color: white;
   font-size: 1rem;
-
-  font-weight: 300;
+  color: #f1faee;
+  font-weight: 500;
 `;
 
 const CaseTitle = styled.span`
@@ -24,7 +23,7 @@ const CaseTitle = styled.span`
   color: #989898;
 `;
 
-const TotalDeath = styled.span`
+const Total = styled.span`
   color: ${props => props.color};
   font-weight: 700;
 `;
@@ -35,11 +34,21 @@ const CountryCard = ({ country }) => {
       <Name>{country.country}</Name>
       <div style={{ marginTop: '1em' }}>
         <CaseTitle>Cases: </CaseTitle>
-        <TotalDeath color='#A6A6A6'>{country.cases}</TotalDeath>
+        <Total color='#f1faee'>{country.cases}</Total>
       </div>
       <div>
         <CaseTitle>Deaths: </CaseTitle>
-        <TotalDeath color='#B41736'>{country.deaths}</TotalDeath>
+        <Total color='#e63946'>{country.deaths}</Total>
+      </div>
+      <div>
+        <CaseTitle>Recovered: </CaseTitle>
+        <Total color='#0ead69'>
+          {country.recovered === 0 ? (
+            <span>Not shared</span>
+          ) : (
+            country.recovered
+          )}
+        </Total>
       </div>
     </Wrapper>
   );
