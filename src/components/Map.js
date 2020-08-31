@@ -36,6 +36,7 @@ const MyMapComponent = compose(
   const total = props.total;
 
   useEffect(() => {
+    
     if (props.click) {
       setCoordinates({
         lat: props.click.countryInfo.lat,
