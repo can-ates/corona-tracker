@@ -370,7 +370,7 @@ export function markerSize(total, confirmed) {
   }
 
   if (confirmed > 2000000 && confirmed <= 5000000) {
-    return new window.google.maps.Size(45, 38);
+    return new window.google.maps.Size(55, 45);
   }
 
   if (confirmed > 5000000) {
